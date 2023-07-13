@@ -1,0 +1,22 @@
+version: 0.0
+os: linux
+files:
+  - source: /
+    destination: /home/ec2-user/node
+hooks:
+  # ApplicationStop:
+  #   - location: Scripts/stop_node
+  #     timeout: 500
+  #     runas: root
+  BeforeInstall:
+    - location: Scripts/before_install.sh
+      timeout: 500
+      runas: root
+  ApplicationStart:
+    - location: Scripts/start_node_Dev.sh
+      timeout: 500
+      runas: root
+  AfterInstall:
+    - location: Scripts/after_install.sh
+      timeout: 100
+      runas: root
