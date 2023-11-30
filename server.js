@@ -1,7 +1,7 @@
 const express = require('express');
 const path = require('path');
 const app = express();
-const bodyParser = require("body-parser");
+const bodyParser = require('body-parser');
 const cors = require('cors');
 
 const port = 80;
@@ -11,17 +11,17 @@ const users = [
   {
     firstName: "first1",
     lastName: "last1",
-    email: "abc@gmail.com"
+    email: "first1.last1@gmail.com"
   },
   {
     firstName: "first2",
     lastName: "last2",
-    email: "abc@gmail.com"
+    email: "first2.last2@gmail.com"
   },
   {
     firstName: "first3",
     lastName: "last3",
-    email: "abc@gmail.com"
+    email: "first3.last3@gmail.com"
   }
 ];
 
@@ -33,15 +33,22 @@ app.use(cors({
   origin: 'http://localhost:3000'
 }));
 
+// Simple GET API with /get path
+app.get('/get', (req, res) => {
+  res.json({ message: 'Hi Aditya, This message is from the server' });
+});
+
 app.get('/api/users', (req, res) => {
-  console.log('api/users called!')
+  console.log('GET /api/users called!');
+  console.log('Returning Users:', users);
   res.json(users);
 });
 
 app.post('/api/user', (req, res) => {
   const user = req.body.user;
-  console.log('Adding user:::::', user);
+  console.log('POST /api/user - Adding user:', user);
   users.push(user);
+  console.log('Updated Users:', users);
   res.json("user added");
 });
 
